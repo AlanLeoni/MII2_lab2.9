@@ -25,6 +25,23 @@ def crea_sfondo() -> Immagine:
     return sfondo
 #visualizza_immagine(crea_sfondo(), debug = True)
 
+def crea_lancetta_secondi(angolo: int) -> Immagine:
+    altezza_lancetta = RAGGIO * 2 // 100
+    pallino_lancetta = cambia_punto_riferimento(cerchio(RAGGIO *8 // 100, ROSSO),"middle", "middle")
+    lancetta_testa = cambia_punto_riferimento(
+        (rettangolo(RAGGIO * 25 // 100, altezza_lancetta, ROSSO)), "right", "middle")
+    lancetta_coda = cambia_punto_riferimento(
+        (rettangolo(RAGGIO * 60 // 100, altezza_lancetta, ROSSO)), "left", "middle")
+    lancetta_orizzontale = affianca(
+        lancetta_testa, affianca(lancetta_coda, pallino_lancetta))
+    lancetta_verticale = ruota(lancetta_orizzontale, 90)
+    lancetta_secondi = ruota(lancetta_verticale, -(angolo))
+    return lancetta_secondi
+#visualizza_immagine(crea_lancetta_secondi(5), debug=True)
+def angolo_secondi(secondi: int) -> int:
+    angolo = secondi * 6
+    return angolo
+
 
 def crea_lancetta_minuti(angolo: int) -> Immagine:
     altezza_lancetta = RAGGIO * 10 // 100
@@ -36,6 +53,7 @@ def crea_lancetta_minuti(angolo: int) -> Immagine:
     lancetta_verticale = ruota(lancetta_orizzontale, 90)
     lancetta_minuti = ruota(lancetta_verticale, -(angolo))
     return lancetta_minuti
+# visualizza_immagine(crea_lancetta_minuti(5), debug=True)
 
 def angolo_minuti(minuti: int) -> int:
     angolo = minuti * 6
@@ -109,10 +127,11 @@ def crea_quadrante() -> Immagine:
 # visualizza_immagine(crea_quadrante(), debug=True)
 
 
-def crea_orologio(ore: int, minuti: int) -> Immagine:
-    orologio = componi(
-        componi(crea_lancetta_ore(angolo_ore(ore)), crea_lancetta_minuti(angolo_minuti(minuti))), crea_quadrante())
+def crea_orologio(ore: int, minuti: int, secondi: int) -> Immagine:
+    ore_minuti = componi(crea_lancetta_ore(angolo_ore(ore)), crea_lancetta_minuti(angolo_minuti(minuti)))
+    lancette = componi(crea_lancetta_secondi(angolo_secondi(secondi)), ore_minuti)
+    orologio = componi(lancette, crea_quadrante())
     return orologio
 
-# salva_immagine("orologio", crea_orologio(5, 10))
-visualizza_immagine(crea_orologio(4, 10))
+salva_immagine("orologio_ore_minuti_secondi", crea_orologio(4, 10, 45))
+#visualizza_immagine(crea_orologio(4, 10, 45))
