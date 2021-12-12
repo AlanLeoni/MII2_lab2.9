@@ -114,5 +114,5 @@ def crea_orologio(ore: int, minuti: int) -> Immagine:
         componi(crea_lancetta_ore(angolo_ore(ore)), crea_lancetta_minuti(angolo_minuti(minuti))), crea_quadrante())
     return orologio
 
-# salva_immagine("orologio", crea_orologio(5, 10))
-visualizza_immagine(crea_orologio(4, 10))
+salva_immagine("orologio", crea_orologio(5, 10))
+#visualizza_immagine(crea_orologio(4, 10))
