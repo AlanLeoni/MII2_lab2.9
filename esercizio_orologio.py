@@ -86,14 +86,16 @@ def crea_lancetta_ore(angolo: int) -> Immagine:
     return ruota(lancetta_verticale, -(angolo))
 
 
-def angolo_ore(ore: int) -> int:
+def angolo_ore(ore: int, minuti: int) -> int:
     """
-    Definisce il grado di rotazione rispetto alle ore
+    Definisce il grado di rotazione della lancetta delle ore rispetto alle ore
+    e ai minuti
     
-    :param ore: la posizione della lancetta. Accetta input a 12 o 24 h
+    :param ore: l'ora desiderata. Accetta input a 12 o 24 h
+    :param minuti: i minuti desiderati
     :returns: l'angolo di apertura della lancetta rispetto alla posizione 0
     """
-    return (ore * 30) % 360
+    return ((ore * 30) % 360) + (angolo_minuti(minuti))//12
 
 
 def crea_tacca_minuti() -> Immagine:
@@ -174,7 +176,7 @@ def crea_orologio(ore: int, minuti: int) -> Immagine:
     :returns: un orologio stile FFS con l'ora e i minuti desiderati
     """
     return componi(
-        componi(crea_lancetta_ore(angolo_ore(ore)), 
+        componi(crea_lancetta_ore(angolo_ore(ore, minuti)), 
                 crea_lancetta_minuti(angolo_minuti(minuti))), 
         crea_quadrante())
 

@@ -66,7 +66,7 @@ def angolo_secondi(secondi: int) -> int:
 
 
 def crea_orologio(ore: int, minuti: int, secondi: int) -> Immagine:
-    ore_minuti = componi(crea_lancetta_ore(angolo_ore(ore)), 
+    ore_minuti = componi(crea_lancetta_ore(angolo_ore(ore, minuti)), 
                          crea_lancetta_minuti(angolo_minuti(minuti)))
     lancette = componi(crea_lancetta_secondi(angolo_secondi(secondi)),
                        ore_minuti)
