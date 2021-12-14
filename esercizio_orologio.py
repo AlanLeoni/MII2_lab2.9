@@ -23,7 +23,6 @@ from img_lib_v0_6 import(
 RAGGIO = 300
 NERO = (0, 0, 0)
 BIANCO = (255, 255, 255)
-ROSSO = (255, 0, 0)
 GRIGIO = (84, 84, 84)
 
 
